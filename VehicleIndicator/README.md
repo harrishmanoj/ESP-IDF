@@ -1,25 +1,52 @@
-# _Sample project_
+# 🚦 Vehicle Indicator Control System (ESP32 + ESP-IDF)
 
-(See the README.md file in the upper level 'examples' directory for more information about examples.)
+This project implements a modular and real-time vehicle indicator system using the **ESP32 microcontroller**, written entirely in **C** with the **ESP-IDF framework**. The system manages **left**, **right**, and **hazard light** operations using push buttons and LEDs, simulating a real-world automotive blinker control.
 
-This is the simplest buildable example. The example is used by command `idf.py create-project`
-that copies the project to user specified path and set it's name. For more information follow the [docs page](https://docs.espressif.com/projects/esp-idf/en/latest/api-guides/build-system.html#start-a-new-project)
+---
+
+## 🧠 Features
+
+- 🔄 Toggle **left** and **right indicators** via physical buttons
+- ⚠️ Activate **hazard lights** when both buttons are pressed
+- 💡 LED blinking at 300ms intervals using **PWM**
+- 🧩 Modular architecture separating hardware drivers and logic
+- ⏱️ **FreeRTOS-based 100ms scheduler** for real-time task handling
+- 📟 **UART logging** of button events and indicator state changes
+
+---
+
+## 📦 Project Structure
+
+indicator-project/
+├── main/
+│ ├── indicator.c # Core logic & FreeRTOS tasks
+│ ├── gpio_driver.c # GPIO button setup and debounce
+│ ├── pwm_driver.c # LED PWM control
+│ ├── uart_driver.c # UART initialization & logging
+│ └── CMakeLists.txt
+├── components/ # (Optional) External reusable modules
+├── CMakeLists.txt
+├── sdkconfig
+└── README.md
+
+## 🔧 Requirements
+
+- ESP32 Dev Board
+- ESP-IDF (v4.x or newer)
+- Two push buttons (for left and right signals)
+- Two LEDs (left and right indicators)
+- USB-UART connection for serial logs
+
+---
+
+## 🚀 Getting Started
+
+### 1. **Clone the Repository**
+```bash
+https://github.com/harrishmanoj/ESP-IDF/edit/main/VehicleIndicator.git
+cd indicator-project
 
 
-
-## How to use example
-We encourage the users to use the example as a template for the new projects.
-A recommended way is to follow the instructions on a [docs page](https://docs.espressif.com/projects/esp-idf/en/latest/api-guides/build-system.html#start-a-new-project).
-
-## Example folder contents
-
-The project **sample_project** contains one source file in C language [main.c](main/main.c). The file is located in folder [main](main).
-
-ESP-IDF projects are built using CMake. The project build configuration is contained in `CMakeLists.txt`
-files that provide set of directives and instructions describing the project's source files and targets
-(executable, library, or both). 
-
-Below is short explanation of remaining files in the project folder.
 
 ```
 ├── CMakeLists.txt
@@ -30,3 +57,5 @@ Below is short explanation of remaining files in the project folder.
 ```
 Additionally, the sample project contains Makefile and component.mk files, used for the legacy Make based build system. 
 They are not used or needed when building with CMake and idf.py.
+
+BLE control was not implemented as it was only mentioned in the submission instructions and not part of the core task.
